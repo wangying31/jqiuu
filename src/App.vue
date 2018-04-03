@@ -1,23 +1,28 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <com-header></com-header>
+    <router-view></router-view>
+    <com-message></com-message>
+    <com-modal></com-modal>
   </div>
 </template>
 
 <script>
+import header from './components/header'
+import message from './components/message'
+import modal from './components/modal'
+
 export default {
-  name: 'App'
+  components : {
+    comHeader : header,
+    comMessage : message,
+    comModal : modal
+  }
+  
 }
+
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
