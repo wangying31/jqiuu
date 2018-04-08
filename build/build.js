@@ -25,7 +25,7 @@ rm('-rf', assetsRoot)
 mkdir('-p', assetsRoot)
 cpus('-R', 'static/*', assetsRoot)
 
-webpack(webpackConfig, (err, stats) => {
+webpack(webpackConfig, (err, stats) => {a
   spinner.stop()
   if (err) throw err
   process.stdout.write(stats.toString({

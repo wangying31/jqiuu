@@ -21,10 +21,10 @@ const versionRequirements = [
 ]
 
 module.exports = function () {
-  const warnings = []
+  let warnings = []
 
   for (let i = 0; i < versionRequirements.length; i++) {
-    const mod = versionRequirements[i]
+    let mod = versionRequirements[i]
 
     if (!semver.satisfies(mod.currentVersion, mod.versionRequirement)) {
       warnings.push(mod.name + ': ' +
@@ -40,7 +40,7 @@ module.exports = function () {
     console.log()
 
     for (let i = 0; i < warnings.length; i++) {
-      const warning = warnings[i]
+      let warning = warnings[i]
       console.log('  ' + warning)
     }
 
