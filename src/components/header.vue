@@ -4,8 +4,8 @@
           <div class="logo">
               <router-link to="/"><img src="/static/" alt="" width="150" height="50" /></router-link>
           </div>
-          <div class="nav_category" @click="showNav"><i class="iconfont icon-category"></i></div>
-          <div class="nav_mobile" v-show="showNav" @click="toggerNav">
+          <div class="nav_category" @click="toggleNav"><i class="iconfont icon-category"></i></div>
+          <div class="nav_mobile" v-show="showNav" @click="toggleNav">
               <ul>
                   <li><router-link to="/" class="nav_mobile_a">主页</router-link></li>
                   <li><router-link to="/dairy" class="nav_mobile_a">日记</router-link></li>
@@ -57,20 +57,21 @@
                 getAuth : 'getAuth'
             }),
             ...mapActions({
-
+                userLogout: 'userLogout',
+                authInfo: 'authInfo'
             })
         },
         mounted(){
             if(this.getToken){
-
+                this.$store.dispatch('authInfo')
             }
         },
         methods : {
             logout(){
-
+                this.$store.dispatch('userLogout')
             },
             toggleNav(){
-
+                this.showNav = !this.showNav;
             }
         }
 

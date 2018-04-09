@@ -20,5 +20,8 @@ export default {
   },
   authInfo: () => {
     axios.get('/user/authInfo', config())
+  },
+  localReg: data => {
+    axios.post('/user/addUser', data, config())
   }
 }
