@@ -4,31 +4,36 @@ import Router from 'vue-router'
 import store from '../store/index'
 
 import index from '../page/index'
+import dairy from '../page/dairy'
 
 Vue.use(Router)
 
-const routers = [{
+const routes = [{
   path: '/',
   component: index,
   meta: { auth: false }
 }, {
-
-}]
+  path: '/dairy',
+  component: dairy,
+  meta: { auth: false }
+}
+]
 
 const router = new Router({
   mode: 'history',
   saveScrollPosition: true,
-  routers
+  routes
 })
 
 router.beforeEach(({meta, path}, from, next) => {
-  const {auth = true} = meta
-  const isLogin = Boolean(store.state.auth.token)// true 已登录
+  var { auth = true } = meta
+  var isLogin = Boolean(store.state.auth.token) // true用户已登录， false用户未登录
+
   if (auth && !isLogin && path !== '/login') {
-    return next({path: '/login'})
+    return next({ path: '/login' })
   }
   if (isLogin && (path === '/login' || path === '/reg')) {
-    return next({path: '/'})
+    return next({ path: '/' })
   }
   next()
 })
