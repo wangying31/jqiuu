@@ -42,12 +42,12 @@
         toggleTime: true
       }
     },
-    mounted(){
+    mounted () {
       const localToggle = localStorage.getItem('indexToggle')
       if(localToggle) {
         this.toggle = true
       }
-      this.getTime();
+      this.getTime()
       this.startTime = setInterval(this.getTime,500)
     },
     methods: {
