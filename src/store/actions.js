@@ -51,7 +51,7 @@ export const userLogin = ({commit}, data) => {
   }).catch(error => {
     if (error.response) {
       showMsg({commit}, {
-        content: error.response.data.errorMsg || '登录失败',
+        content: error.data.errorMsg || '登录失败',
         type: 'danger'
       })
     }
@@ -71,7 +71,7 @@ export const userReg = ({commit}, data) => {
   }).catch(error => {
     if (error.response) {
       showMsg({commit}, {
-        content: error.response.data.errorMsg || '注册失败',
+        content: error.data.errorMsg || '注册失败',
         type: 'danger'
       })
     }
@@ -80,4 +80,192 @@ export const userReg = ({commit}, data) => {
 
 export const updateHeader = ({commit}, data) => {
   commit(types.UPDATE_HEADER, data)
+}
+
+export const tags = ({commit}) => {
+  api.tags().then(response => {
+    commit(types.TAGS, {
+      tags: response.data.tags
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.TAGS)
+    }
+  })
+}
+
+export const newTag = ({commit}, data) => {
+  commit(types.NEW_TAG, data)
+}
+
+export const articlePage = ({commit}, data) => {
+  api.articlePage(data).then(response => {
+    commit(types.ARTICLE_PAGE, {
+      page: response.data.article,
+      collected: response.data.collected,
+      own: response.data.own
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.ARTICLE_PAGE)
+    }
+  })
+}
+
+export const articleCollect = ({commit, state}, data) => {
+  if (state.auth.info) {
+    api.articleCollect(data).then(response => {
+      commit(types.ARTICLE_COLLECT, {
+        collectCount: response.data.collectCount,
+        collected: response.data.collected
+      })
+    }).catch(error => {
+      if (error.response) {
+        commit(types.ARTICLE_PAGE)
+      }
+    })
+  } else {
+    showMsg({commit}, {
+      content: '请登录',
+      type: 'danger'
+    })
+  }
+}
+
+export const addArticle = ({commit}, data) => {
+  api.addArticle(data).then(response => {
+    commit(types.ARTICLE_PAGE, {
+      page: response.data
+    })
+    showMsg({commit}, {
+      content: '提交成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '提交失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const editArticle = ({commit}, data) => {
+  api.editArticle(data).then(response => {
+    commit(types.ARTICLE_PAGE, {
+      page: response.data.article
+    })
+    showMsg({commit}, {
+      content: '修改成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '修改失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const delArticle = ({ commit }, data) => {
+  api.delArticle(data).then(response => {
+    commit(types.ARTICLE_DELETE, {
+      deleted: response.data.success
+    })
+    showMsg({ commit }, {
+      content: '删除成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '删除失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const articleList = ({commit}, data) => {
+  commit(types.ARTICLE_STATUS, {status: 1})
+  api.articleList(data).then(response => {
+    const status = response.data.article.length === 10 ? 0 : 2
+    commit(types.ARTICLE_LIST, {
+      list: response.data.article,
+      status: status
+    })
+  }).catch(error => {
+    commit(types.ARTICLE_STATUS, {status: 0})
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const articleKeyword = ({commit}, data) => {
+  commit(types.ARTICLE_KEYWORD, {
+    keyword: data
+  })
+}
+
+export const articleTagName = ({ commit }, data) => {
+  commit(types.ARTICLE_TAGNAME, {
+    tagName: data
+  })
+}
+
+export const articleClear = ({ commit }) => {
+  commit(types.ARTICLE_CLEAR)
+}
+
+export const articleUser = ({commit}, data) => {
+  commit(types.ARTICLE_USER_STATUS, {status: 1})
+  api.articleUser(data).then(response => {
+    const status = response.data.article.length === 10 ? 0 : 2
+    commit(types.ARTICLE_USER, {
+      list: response.data.article,
+      status: status
+    })
+  }).catch(error => {
+    commit(types.ARTICLE_USER_STATUS, {status: 0})
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const articleUserClear = ({ commit }) => {
+  commit(types.ARTICLE_USER_CLEAR)
+}
+
+export const articleTogether = ({ commit }, data) => {
+  commit(types.ARTICLE_TOGETHER_STATUS, {status: 1})
+  api.articleTogether(data).then(function (response) {
+    const status = response.data.article.length === 10 ? 0 : 2
+    commit(types.ARTICLE_TOGETHER, {
+      list: response.data.article,
+      status: status
+    })
+  }).catch(function (error) {
+    commit(types.ARTICLE_TOGETHER_STATUS, {status: 0})
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const articleTogetherClear = ({ commit }) => {
+  commit(types.ARTICLE_TOGETHER_CLEAR)
 }

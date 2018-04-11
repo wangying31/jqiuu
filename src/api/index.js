@@ -23,5 +23,8 @@ export default {
   },
   localReg: data => {
     axios.post('/user/addUser', data, config())
+  },
+  articleList: data => {
+    return axios.get('/article/articleList/' + data, config())
   }
 }
