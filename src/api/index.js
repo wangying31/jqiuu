@@ -23,5 +23,14 @@ export default {
   },
   localReg: data => {
     axios.post('/user/addUser', data, config())
+  },
+  articleList: data => {
+    return axios.get('/article/articleList/' + data, config())
+  },
+  photoList: data => {
+    return axios.get('/album/photoList/' + data, config())
+  },
+  photoLike: data => {
+    return axios.put('/album/' + data + '/photoLike', {}, config())
   }
 }

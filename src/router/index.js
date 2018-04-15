@@ -5,6 +5,8 @@ import store from '../store/index'
 
 import index from '../page/index'
 import dairy from '../page/dairy'
+import photo from '../page/photo'
+import login from '../page/login'
 
 Vue.use(Router)
 
@@ -16,6 +18,13 @@ const routes = [{
   path: '/dairy',
   component: dairy,
   meta: { auth: false }
+}, {
+  path: '/photo',
+  component: photo,
+  meta: {auth: false}
+}, {
+  path: '/login',
+  component: login
 }
 ]
 

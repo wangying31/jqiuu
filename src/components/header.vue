@@ -8,7 +8,7 @@
           <div class="nav_mobile" v-show="showNav" @click="toggleNav">
               <ul>
                   <li><router-link to="/" class="nav_mobile_a">主页</router-link></li>
-                  <li><router-link to="/dairy" class="nav_mobile_a">日记</router-link></li>
+                  <li><router-link to="/dairy" class="nav_mobile_a">随记</router-link></li>
                   <li><router-link to="/photo" class="nav_mobile_a">照片墙</router-link></li>
                   <li v-if="!getAuth">
                       <router-link to="/login" class="nav_mobile_a">登录</router-link>
@@ -21,7 +21,7 @@
           <div class="nav clearfix">
                 <ul>
                     <li><router-link to="/"  class="nav_a" active-class="nav_active" exact>主页</router-link></li>
-                    <li><router-link to="/dairy" class="nav_a" active-class="nav_active">日记</router-link></li>
+                    <li><router-link to="/dairy" class="nav_a" active-class="nav_active">随记</router-link></li>
                     <li><router-link to="/photo" class="nav_a" active-class="nav_active">照片墙</router-link></li>
                     <li v-if="!getAuth"><router-link to="/login" class="nav_a" active-class="nav_active">登录</router-link></li>
                     <li v-else>
