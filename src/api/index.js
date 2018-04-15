@@ -26,5 +26,11 @@ export default {
   },
   articleList: data => {
     return axios.get('/article/articleList/' + data, config())
+  },
+  photoList: data => {
+    return axios.get('/album/photoList/' + data, config())
+  },
+  photoLike: data => {
+    return axios.put('/album/' + data + '/photoLike', {}, config())
   }
 }

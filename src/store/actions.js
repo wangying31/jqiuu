@@ -266,6 +266,72 @@ export const articleTogether = ({ commit }, data) => {
   })
 }
 
+export const photoList = ({commit}, data) => {
+  commit(types.PHOTO_STATUS, {status: 1})
+  api.photoList(data).then(response => {
+    if (response.data.photo.length === 0) {
+      return commit(types.PHOTO_STATUS, {status: 2})
+    }
+    const status = response.data.photo.length === 20 ? 0 : 2
+    let photoCount = 0
+    for (let i = 0; i < response.data.photo.length; i++) {
+      const tempImage = new Image()
+      tempImage.onload = () => {
+        photoCount++
+        response.data.photo[i].height = tempImage.height + 30
+        if (photoCount === response.data.photo.length) {
+          commit(types.PHOTO_LIST, {
+            list: response.data.photo,
+            status: status
+          })
+        }
+      }
+      tempImage.onerror = () => {
+        photoCount++
+        response.data.photo[i].height = 0
+        if (photoCount === response.data.photo.length) {
+          commit(types.PHOTO_LIST, {
+            list: response.data.photo,
+            status: status
+          })
+        }
+      }
+      tempImage.src = response.data.photo[i].thumbnail
+    }
+  }).catch(error => {
+    commit(types.PHOTO_STATUS, {status: 0})
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const photoClear = ({ commit }) => {
+  commit(types.PHOTO_CLEAR)
+}
+
+export const photoLike = ({ commit }, data) => {
+  api.photoLike(data.pid).then(response => {
+    if (data.pid === response.data.pid) {
+      commit(types.PHOTO_LIKE, {
+        index: data.index,
+        likeCount: response.data.likeCount
+      })
+    }
+  })
+    .catch(error => {
+      if (error.response) {
+        showMsg({commit}, {
+          content: error.response.data.errorMsg || '点赞失败',
+          type: 'danger'
+        })
+      }
+    })
+}
+
 export const articleTogetherClear = ({ commit }) => {
   commit(types.ARTICLE_TOGETHER_CLEAR)
 }
