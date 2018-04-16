@@ -7,6 +7,12 @@ import index from '../page/index'
 import dairy from '../page/dairy'
 import photo from '../page/photo'
 import login from '../page/login'
+import reg from '../page/reg'
+import set from '../page/set'
+
+import setIndex from '../components/set/index'
+import setFriend from '../components/set/friend'
+import setPassword from '../components/set/password'
 
 Vue.use(Router)
 
@@ -25,6 +31,30 @@ const routes = [{
 }, {
   path: '/login',
   component: login
+}, {
+  path: '/reg',
+  component: reg,
+  meta: { auth: false }
+}, {
+  path: '/set',
+  component: set,
+  children: [
+    {
+      path: '',
+      name: 'setIndex',
+      component: setIndex
+    },
+    {
+      path: 'password',
+      name: 'setPassword',
+      component: setPassword
+    },
+    {
+      path: 'friend',
+      name: 'setFriend',
+      component: setFriend
+    }
+  ]
 }
 ]
 

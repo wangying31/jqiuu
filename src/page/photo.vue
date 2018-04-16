@@ -59,7 +59,7 @@
       })
     },
     mounted () {
-      this.$store.dispatch(photoClear)
+      this.$store.dispatch('photoClear')
       this.loadPhoto()
       window.addEventListener('scroll', this.loadMore)
     },
@@ -67,7 +67,7 @@
       loadPhoto(){
         const lastPhoto = this.getPhotoList.list[this.getPhotoList.list.length - 1]
         const time = lastPhoto ? new Date(lastPhoto.created) : new Date()
-        let date = time.getTime()
+        let data = time.getTime()
         this.$store.dispatch('photoList', data)
       },
       loadMore(){
