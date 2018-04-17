@@ -68,12 +68,12 @@ router.beforeEach(({meta, path}, from, next) => {
   var { auth = true } = meta
   var isLogin = Boolean(store.state.auth.token) // true用户已登录， false用户未登录
 
-  if (auth && !isLogin && path !== '/login') {
-    return next({ path: '/login' })
-  }
-  if (isLogin && (path === '/login' || path === '/reg')) {
-    return next({ path: '/' })
-  }
+  // if (auth && !isLogin && path !== '/login') {
+  //   return next({ path: '/login' })
+  // }
+  // if (isLogin && (path === '/login' || path === '/reg')) {
+  //   return next({ path: '/' })
+  // }
   next()
 })
 
