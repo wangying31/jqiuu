@@ -18,7 +18,7 @@ export default {
   localLogin: data => {
     axios.post('/auth/local', data, config())
   },
-  authInfo: () => {
+  authInfo () {
     axios.get('/user/authInfo', config())
   },
   localReg: data => {
@@ -32,5 +32,20 @@ export default {
   },
   photoLike: data => {
     return axios.put('/album/' + data + '/photoLike', {}, config())
+  },
+  userInfo: data => {
+    return axios.get('/user' + data + '/userInfo', config())
+  },
+  userSet: () => {
+    return axios.get('/user/set', config())
+  },
+  updateUser: data => {
+    return axios.put('/user/updateUser', data, config())
+  },
+  updatePassword: data => {
+    return axios.put('/user/updatePassword', data, config())
+  },
+  tags: data => {
+    return axios.get('/article/tags', config())
   }
 }

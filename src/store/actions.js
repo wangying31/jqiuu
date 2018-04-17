@@ -78,8 +78,68 @@ export const userReg = ({commit}, data) => {
   })
 }
 
+export const userInfo = ({commit}, data) => {
+  api.userInfo(data).then(response => {
+    commit(types.USER_INFO, {
+      own: response.data.own,
+      info: response.data.userInfo
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.USER_INFO)
+    }
+  })
+}
+
+export const userSet = ({ commit }) => {
+  api.userSet().then(response => {
+    commit(types.USER_SET, {
+      own: response.data.own,
+      info: response.data.userInfo
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.USER_SET)
+    }
+  })
+}
+
+export const updateUser = ({commit}, data) => {
+  api.updateUser(data).then(response => {
+    commit(types.UPDATE_USER, {
+      info: response.data.userInfo
+    })
+    showMsg({commit}, {
+      content: '修改成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '修改失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
 export const updateHeader = ({commit}, data) => {
   commit(types.UPDATE_HEADER, data)
+}
+export const updatePassword = ({commit}, data) => {
+  api.updatePassword(data).then(response => {
+    showMsg({commit}, {
+      content: '修改成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '修改失败',
+        type: 'danger'
+      })
+    }
+  })
 }
 
 export const tags = ({commit}) => {
