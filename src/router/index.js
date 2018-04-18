@@ -9,10 +9,15 @@ import photo from '../page/photo'
 import login from '../page/login'
 import reg from '../page/reg'
 import set from '../page/set'
+import user from '../page/user'
 
 import setIndex from '../components/set/index'
 import setFriend from '../components/set/friend'
 import setPassword from '../components/set/password'
+import userIndex from '../components/user/index'
+import userAlbum from '../components/user/album'
+import userTogether from '../components/user/together'
+import userInfo from '../components/user/info'
 
 Vue.use(Router)
 
@@ -55,6 +60,30 @@ const routes = [{
       component: setFriend
     }
   ]
+}, {
+  path: '/u/:uid',
+  component: user,
+  children: [{
+    path: '',
+    name: 'userIndex',
+    component: userIndex,
+    meta: {auth: false}
+  }, {
+    path: 'album',
+    name: 'userAlbum',
+    component: userAlbum,
+    meta: {auth: false}
+  }, {
+    path: 'together',
+    name: 'userTogether',
+    component: userTogether,
+    meta: {auth: false}
+  }, {
+    path: 'info',
+    name: 'userInfo',
+    component: userInfo,
+    meta: {auth: false}
+  }]
 }
 ]
 
