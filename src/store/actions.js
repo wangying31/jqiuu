@@ -326,6 +326,14 @@ export const articleTogether = ({ commit }, data) => {
   })
 }
 
+export const addPhoto = ({commit}, data) => {
+  api.addPhoto(data).then(response => {
+    commit(types.PHOTO_ADD, {
+      photo: response.data.photo
+    })
+  })
+}
+
 export const photoList = ({commit}, data) => {
   commit(types.PHOTO_STATUS, {status: 1})
   api.photoList(data).then(response => {
@@ -371,6 +379,71 @@ export const photoList = ({commit}, data) => {
 
 export const photoClear = ({ commit }) => {
   commit(types.PHOTO_CLEAR)
+}
+
+export const photoUser = ({commit}, data) => {
+  commit(types.PHOTO_USER_STATUS, {status: 1})
+  api.photoUser(data).then(function (response) {
+    const status = response.data.photo.length === 0 ? 2 : 0
+    commit(types.PHOTO_USER, {
+      list: response.data.photo,
+      own: response.data.own,
+      status: status
+    })
+  }).catch(function (error) {
+    commit(types.PHOTO_USER_STATUS, {status: 0})
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const photoUserClear = ({ commit }) => {
+  commit(types.PHOTO_USER_CLEAR)
+}
+
+export const delPhoto = ({ commit }, data) => {
+  api.delPhoto(data.pid).then(function (response) {
+    if (response.data.photo._id === data.pid) {
+      commit(types.PHOTO_DEL, {
+        itemIndex: data.itemIndex,
+        photoIndex: data.photoIndex
+      })
+      showMsg({commit}, {
+        content: '删除成功',
+        type: 'info'
+      })
+    }
+  }).catch(function (error) {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const photoLikeUser = ({ commit }, data) => {
+  api.photoLike(data.pid).then(function (response) {
+    if (data.pid === response.data.pid) {
+      commit(types.PHOTO_LIKE_USER, {
+        itemIndex: data.itemIndex,
+        photoIndex: data.photoIndex,
+        likeCount: response.data.likeCount
+      })
+    }
+  }).catch(function (error) {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '点赞失败',
+        type: 'danger'
+      })
+    }
+  })
 }
 
 export const photoLike = ({ commit }, data) => {
