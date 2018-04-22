@@ -309,13 +309,13 @@ export const articleUserClear = ({ commit }) => {
 
 export const articleTogether = ({ commit }, data) => {
   commit(types.ARTICLE_TOGETHER_STATUS, {status: 1})
-  api.articleTogether(data).then(function (response) {
+  api.articleTogether(data).then(response => {
     const status = response.data.article.length === 10 ? 0 : 2
     commit(types.ARTICLE_TOGETHER, {
       list: response.data.article,
       status: status
     })
-  }).catch(function (error) {
+  }).catch(error => {
     commit(types.ARTICLE_TOGETHER_STATUS, {status: 0})
     if (error.response) {
       showMsg({ commit }, {
@@ -383,14 +383,14 @@ export const photoClear = ({ commit }) => {
 
 export const photoUser = ({commit}, data) => {
   commit(types.PHOTO_USER_STATUS, {status: 1})
-  api.photoUser(data).then(function (response) {
+  api.photoUser(data).then(response => {
     const status = response.data.photo.length === 0 ? 2 : 0
     commit(types.PHOTO_USER, {
       list: response.data.photo,
       own: response.data.own,
       status: status
     })
-  }).catch(function (error) {
+  }).catch(error => {
     commit(types.PHOTO_USER_STATUS, {status: 0})
     if (error.response) {
       showMsg({commit}, {
@@ -406,7 +406,7 @@ export const photoUserClear = ({ commit }) => {
 }
 
 export const delPhoto = ({ commit }, data) => {
-  api.delPhoto(data.pid).then(function (response) {
+  api.delPhoto(data.pid).then(response => {
     if (response.data.photo._id === data.pid) {
       commit(types.PHOTO_DEL, {
         itemIndex: data.itemIndex,
@@ -417,7 +417,7 @@ export const delPhoto = ({ commit }, data) => {
         type: 'info'
       })
     }
-  }).catch(function (error) {
+  }).catch(error => {
     if (error.response) {
       showMsg({commit}, {
         content: error.response.data.errorMsg || '网络故障',
@@ -428,7 +428,7 @@ export const delPhoto = ({ commit }, data) => {
 }
 
 export const photoLikeUser = ({ commit }, data) => {
-  api.photoLike(data.pid).then(function (response) {
+  api.photoLike(data.pid).then(response => {
     if (data.pid === response.data.pid) {
       commit(types.PHOTO_LIKE_USER, {
         itemIndex: data.itemIndex,
@@ -436,7 +436,7 @@ export const photoLikeUser = ({ commit }, data) => {
         likeCount: response.data.likeCount
       })
     }
-  }).catch(function (error) {
+  }).catch(error => {
     if (error.response) {
       showMsg({commit}, {
         content: error.response.data.errorMsg || '点赞失败',

@@ -10,6 +10,9 @@ import login from '../page/login'
 import reg from '../page/reg'
 import set from '../page/set'
 import user from '../page/user'
+import page from '../page/page'
+import article from '../page/article'
+import edit from '../page/edit'
 
 import setIndex from '../components/set/index'
 import setFriend from '../components/set/friend'
@@ -83,6 +86,18 @@ const routes = [{
     name: 'userInfo',
     component: userInfo,
     meta: {auth: false}
+  }, {
+    path: '/article',
+    component: article
+  }, {
+    path: '/p/:aid',
+    name: 'page',
+    component: page,
+    meta: { auth: false }
+  }, {
+    path: '/p/:aid/edit',
+    name: 'edit',
+    component: edit
   }]
 }
 ]
