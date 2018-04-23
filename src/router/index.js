@@ -81,26 +81,25 @@ const routes = [{
     name: 'userTogether',
     component: userTogether,
     meta: {auth: false}
-  }, {
-    path: 'info',
-    name: 'userInfo',
-    component: userInfo,
-    meta: {auth: false}
-  }, {
-    path: '/article',
-    component: article
-  }, {
-    path: '/p/:aid',
-    name: 'page',
-    component: page,
-    meta: { auth: false }
-  }, {
-    path: '/p/:aid/edit',
-    name: 'edit',
-    component: edit
   }]
-}
-]
+}, {
+  path: 'info',
+  name: 'userInfo',
+  component: userInfo,
+  meta: {auth: false}
+}, {
+  path: '/article',
+  component: article
+}, {
+  path: '/p/:aid',
+  name: 'page',
+  component: page,
+  meta: { auth: false }
+}, {
+  path: '/p/:aid/edit',
+  name: 'edit',
+  component: edit
+}]
 
 const router = new Router({
   mode: 'history',

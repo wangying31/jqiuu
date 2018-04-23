@@ -468,3 +468,95 @@ export const photoLike = ({ commit }, data) => {
 export const articleTogetherClear = ({ commit }) => {
   commit(types.ARTICLE_TOGETHER_CLEAR)
 }
+
+export const commentList = ({commit}, data) => {
+  api.commentList(data).then(response => {
+    commit(types.COMMENT_LIST, {
+      comment: response.data.comment
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.COMMENT_LIST)
+    }
+  })
+}
+
+export const commentListAll = ({ commit }, data) => {
+  api.commentListAll(data).then(response => {
+    commit(types.COMMENT_LIST, {
+      comment: response.data.comment
+    })
+  })
+    .catch(error => {
+      if (error.response) {
+        commit(types.COMMENT_LIST)
+      }
+    })
+}
+
+export const addComment = ({commit, state}, data) => {
+  api.addComment(data).then(response => {
+    const comment = response.data.comment
+    comment.userId = {
+      _id: state.auth.info.id,
+      nickname: state.auth.info.nickname,
+      header: state.auth.info.header
+    }
+    commit(types.ARTICLE_COMMENT, {
+      comment: comment
+    })
+    commit(types.ARTICLE_COMMENT, {
+      commentCount: response.data.commentCount
+    })
+    showMsg({ commit }, {
+      content: '留言成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '留言失败，登录后可以留言',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const delComment = ({ commit }, data) => {
+  api.delComment(data).then(response => {
+    commentList({ commit }, response.data.aid)
+    commit(types.ARTICLE_COMMENT, {
+      commentCount: response.data.commentCount
+    })
+    showMsg({ commit }, {
+      content: '删除成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '删除失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const articleStatus = ({ commit }, data) => {
+  api.articleStatus(data).then(response => {
+    commit(types.ARTICLE_PAGE_STATUS, {
+      articleStatus: response.data.articleStatus
+    })
+    showMsg({ commit }, {
+      content: '修改成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({commit}, {
+        content: error.response.data.errorMsg || '修改失败',
+        type: 'danger'
+      })
+    }
+  })
+}
