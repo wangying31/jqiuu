@@ -2,7 +2,7 @@
   <div class="header">
       <div class="container">
           <div class="logo">
-              <router-link to="/"><img src="/static/" alt="" width="150" height="50" /></router-link>
+              <router-link to="/"><img src="/static/img/logo.png" alt="" width="150" height="50" /></router-link>
           </div>
           <div class="nav_category" @click="toggleNav"><i class="iconfont icon-category"></i></div>
           <div class="nav_mobile" v-show="showNav" @click="toggleNav">
