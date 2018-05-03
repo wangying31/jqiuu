@@ -15,82 +15,82 @@ function config () {
 }
 
 export default {
-  localLogin: data => {
-    axios.post('/auth/local', data, config())
+  localLogin: function (data) {
+    return axios.post('/auth/local', data, config())
   },
-  authInfo () {
-    axios.get('/user/authInfo', config())
+  localReg: function (data) {
+    return axios.post('/user/addUser', data, config())
   },
-  localReg: data => {
-    axios.post('/user/addUser', data, config())
+  authInfo: function () {
+    return axios.get('/user/authInfo', config())
   },
-  userInfo: data => {
-    return axios.get('/user' + data + '/userInfo', config())
+  userInfo: function (data) {
+    return axios.get('/user/' + data + '/userInfo', config())
   },
-  userSet: () => {
+  userSet: function () {
     return axios.get('/user/set', config())
   },
-  updateUser: data => {
+  updateUser: function (data) {
     return axios.put('/user/updateUser', data, config())
   },
-  updatePassword: data => {
+  updatePassword: function (data) {
     return axios.put('/user/updatePassword', data, config())
   },
-  tags: data => {
+  tags: function (data) {
     return axios.get('/article/tags', config())
   },
-  articlePage: data => {
+  articlePage: function (data) {
     return axios.get('/article/' + data + '/articlePage', config())
   },
-  articleCollect: data => {
+  articleCollect: function (data) {
     return axios.put('/article/' + data + '/articleCollect', {}, config())
   },
-  addArticle: data => {
+  addArticle: function (data) {
     return axios.post('/article/addArticle', data, config())
   },
-  articleList: data => {
+  articleList: function (data) {
     return axios.get('/article/articleList/' + data, config())
   },
-  articleUser: data => {
+  articleUser: function (data) {
     return axios.get('/article/' + data, config())
   },
-  articleTogether: data => {
+  articleTogether: function (data) {
     return axios.get('/article/' + data + '/articleTogether', config())
   },
-  commentList: data => {
+  commentList: function (data) {
     return axios.get('/comment/' + data + '/commentList', config())
   },
-  commentListAll: data => {
+  commentListAll: function (data) {
     return axios.get('/comment/' + data + '/commentListAll', config())
   },
-  addComment: data => {
+  addComment: function (data) {
     return axios.post('/comment/addComment', data, config())
   },
-  delComment: data => {
+  delComment: function (data) {
     return axios.delete('/comment/' + data, config())
   },
-  editArticle: data => {
+  editArticle: function (data) {
     return axios.put('/article/' + data.aid + '/editArticle', data, config())
   },
-  delArticle: data => {
+  delArticle: function (data) {
     return axios.delete('/article/' + data, config())
   },
-  articleStatus: data => {
+  articleStatus: function (data) {
     return axios.put('/article/' + data + '/articleStatus', {}, config())
   },
-  addPhoto: data => {
+  addPhoto: function (data) {
     return axios.post('/album/addPhoto', data, config())
   },
-  photoList: data => {
+  photoList: function (data) {
     return axios.get('/album/photoList/' + data, config())
   },
-  photoLike: data => {
-    return axios.put('/album/' + data + '/photoLike', {}, config())
-  },
-  photoUser: data => {
+  photoUser: function (data) {
     return axios.get('/album/' + data + '/photoUser', config())
   },
-  delPhoto: data => {
+  delPhoto: function (data) {
     return axios.delete('/album/' + data, config())
+  },
+  photoLike: function (data) {
+    return axios.put('/album/' + data + '/photoLike', {}, config())
   }
 }

@@ -28,7 +28,7 @@
           <div class="tit">标签</div>
           <div class="inp">
             <select class="form-control panel_tit_input" v-model="article.tag">
-              <option v-for="option in getTags" :value="option" :key="option.id">{{option}}</option>
+              <option v-for="option in getTags" :value="option" :key="option._id">{{option}}</option>
             </select>
             <button class="btn btn-info" @click="addTag">{{tag.text}}</button>
             <input type="text" class="form-control panel_tit_input" v-model.trim="tag.newTag" v-show="tag.show" placeholder="添加标签">

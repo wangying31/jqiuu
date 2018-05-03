@@ -1,7 +1,7 @@
 <template>
   <div class="message message-position">
     <transition-group name="message" tag="div">
-      <div class="message_div hover_sh" :class="messageTypClass(item)" v-for="item in message" :key="item.id">
+      <div class="message_div hover_sh" :class="messageTypeClass(item)" v-for="item in message" :key="item.id">
         <div class="message_text">{{item.content}}</div>
         <button class="message_button" @click="close(item.id)"></button>
       </div>
