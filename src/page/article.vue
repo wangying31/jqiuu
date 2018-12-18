@@ -79,21 +79,20 @@
         this.$store.dispatch('tags')
         this.article.tag = this.getTags[0]
         const url = (process.env.NODE_ENV === 'production')
-          ? 'http://'
+          ? 'http://localhost:3000/article/upload'
           :'http://localhost:3000/article/upload'
 
-        this.editor =  new WE('editor')
-        this.editor.config.menus = [
-          'source', '|',
-          'bold', 'underline', 'italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|',
-          'quote', 'fontfamily', 'fontsize', 'head', 'unorderlist', 'orderlist', 'alignleft', 'aligncenter', 'alignright', '|',
-          'link', 'unlink', 'table', 'img', 'insertcode', '|',
-          'undo', 'redo', 'fullscreen'
+        this.editor = new WE('#editor')
+        this.editor.customConfig.menus = [
+          'bold', 'underline', 'italic', 'strikeThrough', 'eraser', 'foreColor', 'backColor',
+          'quote', 'fontName', 'fontSize', 'head', 'list', 'justify',
+          'link', 'unink', 'table', 'image', 'code', 'emoticon',
+          'undo', 'redo'
         ]
-        this.editor.config.menuFixed = false
-        this.editor.config.uploadImgUrl = url
-        this.editor.config.hideLinkImg = true
-        this.editor.config.uploadHeaders = {
+        this.editor.customConfig.menuFixed = false
+        this.editor.customConfig.uploadImgServer = url
+        this.editor.customConfig.showLinkImg = false
+        this.editor.customConfig.uploadImgHeaders = {
           'Authorization': 'Bearer ' + localStorage.getItem('user').replace(/(^\")|(\"$)/g, '')
         }
         this.editor.create()
@@ -113,8 +112,9 @@
           }
         },
         articleSub () {
-          this.article.content = this.editor.$txt.html()
-          this.article.image = this.editor.$txt.find('img').eq(0).attr('src')
+          debugger;
+          this.article.content = this.editor.txt.html()
+          this.article.image = this.editor.txt.find('img').eq(0).attr('src')
           this.article.status? this.article.status = 1 : this.article.status = 0
           this.$store.dispatch('addArticle', this.article)
         }

@@ -81,12 +81,12 @@ const routes = [{
     name: 'userTogether',
     component: userTogether,
     meta: {auth: false}
+  }, {
+    path: 'info',
+    name: 'userInfo',
+    component: userInfo,
+    meta: {auth: false}
   }]
-}, {
-  path: 'info',
-  name: 'userInfo',
-  component: userInfo,
-  meta: {auth: false}
 }, {
   path: '/article',
   component: article

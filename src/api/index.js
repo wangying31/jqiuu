@@ -2,7 +2,7 @@ import axios from 'axios'
 /* eslint-disable no-unused-vars */
 const qs = require('querystring')
 
-const ROOT = (process.env.NODE_ENV === 'production') ? 'http://' : 'http://localhost:3000'
+const ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000' : 'http://localhost:3000'
 
 function config () {
   const base = {
