@@ -112,9 +112,9 @@
           }
         },
         articleSub () {
-          debugger;
           this.article.content = this.editor.txt.html()
-          this.article.image = this.editor.txt.find('img').eq(0).attr('src')
+          // this.article.image = this.editor.txt.find('img').eq(0).attr('src')
+          this.article.image = this.editor.$textElem.find('img')[0] && this.editor.$textElem.find('img')[0].src
           this.article.status? this.article.status = 1 : this.article.status = 0
           this.$store.dispatch('addArticle', this.article)
         }
