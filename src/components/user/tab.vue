@@ -15,7 +15,7 @@
                   </template>
                 </router-link>
               </td>
-              <td>
+              <td v-if="authAndAdmin()">
                 <router-link :to="{ name: 'userAlbum', params: { uid }}" class="tab_user_a" active-class="user_active">
                   <template v-if="me()">我的相册</template>
                   <template v-else>
@@ -55,6 +55,11 @@
       me () {
         if (this.getAuth) {
           return this.getAuth.id == this.getUser.info.id
+        }
+      },
+      authAndAdmin () {
+        if (this.getAuth) {
+          return this.getUser.info.role == 'admin';
         }
       }
     }
