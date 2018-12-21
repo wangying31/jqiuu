@@ -26,7 +26,9 @@
                     <li v-if="!getAuth"><router-link to="/login" class="nav_a" active-class="nav_active">登录</router-link></li>
                     <li v-else>
                         <a href="javascript:void(0)" class="nav_user">
-                            <img :src="getAuth.header" class="circle" width="30" height="30"> {{getAuth.nickname}}
+                            <router-link :to="{ name: 'userIndex', params: { uid: getAuth.id }}">
+                                <img :src="getAuth.header" class="circle" width="30" height="30"> {{getAuth.nickname}}
+                            </router-link>
                             <ul class="nav_user_ul">
                                 <li><router-link :to="{ name: 'userIndex', params: { uid: getAuth.id }}">我的主页</router-link></li>
                                 <li v-if="ad()"><router-link :to="{ name: 'userAlbum', params: { uid: getAuth.id }}">我的相册</router-link></li>
