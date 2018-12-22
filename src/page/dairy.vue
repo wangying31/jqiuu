@@ -70,7 +70,7 @@
                   </router-link>
                 </div>
                 <div class="col-xs-4 panel_homepage_box">
-                  <router-link :to="{ name: 'userAlbum', params: { uid: getAuth.id }}">
+                  <router-link :to="{ name: 'userIndex', params: { uid: getAuth.id }}">
                     <strong>{{getAuth.photoCount}}</strong>
                     <span>图片</span>
                   </router-link>

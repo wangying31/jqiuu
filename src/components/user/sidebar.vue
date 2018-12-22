@@ -6,19 +6,19 @@
     <div class="panel_s">
       <div class="panel_homepage_num clearfix text-center">
         <div class="col-xs-4 panel_homepage_box">
-          <router-link :to="{ name: 'userIndex', params: { uid }}">
+          <router-link :to="{ name: '', params: { uid }}">
             <strong>{{getUser.info.articleCount}}</strong>
             <span>日记</span>
           </router-link>
         </div>
         <div class="col-xs-4 panel_homepage_box">
-          <router-link :to="{ name: 'userIndex', params: { uid }}">
+          <router-link :to="{ name: '', params: { uid }}">
             <strong>{{getUser.info.collectCount}}</strong>
             <span>收藏</span>
           </router-link>
         </div>
         <div class="col-xs-4 panel_homepage_box">
-          <router-link :to="{ name: 'userAlbum', params: { uid }}">
+          <router-link :to="{ name: '', params: { uid }}">
             <strong>{{getUser.info.photoCount}}</strong>
             <span>相册</span>
           </router-link>
