@@ -23,9 +23,9 @@ spinner.start()
 const assetsRoot = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
 rm('-rf', assetsRoot)
 mkdir('-p', assetsRoot)
-cpus('-R', 'static/*', assetsRoot)
+cp('-R', 'static/*', assetsRoot)
 
-webpack(webpackConfig, (err, stats) => {a
+webpack(webpackConfig, (err, stats) => {
   spinner.stop()
   if (err) throw err
   process.stdout.write(stats.toString({

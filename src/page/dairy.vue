@@ -85,7 +85,7 @@
             </h5>
             <div class="panel_s_body">
               <ul class="ul_text">
-                <li v-for="(tag,index) in getTags" :key="tag.id">
+                <li v-for="(tag,index) in getTags" :key="tag._id">
                   <a href="javascript:void(0)" v-bind:class="{link: tagName==getTags[index]}" @click="tagChange(index)">{{tag}}</a>
                 </li>
               </ul>

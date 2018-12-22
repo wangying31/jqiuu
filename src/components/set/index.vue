@@ -196,7 +196,7 @@
         e.target.value = e.target.checked ? 1 : 0
         this.newUser(e)
       },
-      upload () {
+      update () {
         this.$store.dispatch('updateUser', this.newUserInfo)
       },
       toggleShow () {

@@ -51,7 +51,7 @@ export const userLogin = ({commit}, data) => {
   }).catch(error => {
     if (error.response) {
       showMsg({commit}, {
-        content: error.data.errorMsg || '登录失败',
+        content: error.response.data.errorMsg || '登录失败',
         type: 'danger'
       })
     }
@@ -71,7 +71,7 @@ export const userReg = ({commit}, data) => {
   }).catch(error => {
     if (error.response) {
       showMsg({commit}, {
-        content: error.data.errorMsg || '注册失败',
+        content: error.response.data.errorMsg || '注册失败',
         type: 'danger'
       })
     }

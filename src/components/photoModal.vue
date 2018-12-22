@@ -6,13 +6,13 @@
           <h4>照片</h4>
         </div>
         <div class="panel_body text-center" @click="close">
-          <img src="photoModal.photo" alt="">
+          <img :src="photoModal.photo" alt="">
         </div>
         <div class="panel_foot" v-if="photoModal.userId">
           <span title="日期">
             <i class="iconfont icon-clock"></i>{{photoModal.created | date}}
           </span>
-          <span><i class="iconfoot icon-account"></i>
+          <span>
             <span><i class="iconfont icon-account"></i> <router-link :to="{ name: 'userAlbum', params: { uid:photoModal.userId._id }}" class="link"> {{photoModal.userId.nickname}}</router-link></span>
             <span class="photo_like" @click="photoLikeBtn(photoModal._id,index)"><i class="iconfont icon-like"></i> {{photoModal.likeCount}}</span>
           </span>
@@ -52,12 +52,15 @@
         photoLike: 'photoLike'
       })
     },
+    mounted() {
+      
+    },
     methods: {
       close(){
         this.loading = false
         this.$emit('input', false)
       },
-      photoListBtn(pid, index){
+      photoLikeBtn(pid, index){
         this.$store.dispatch('photoLike', {
           pid: pid,
           index: index
@@ -82,7 +85,7 @@
     filters: {
       date: (value) => {
         let date = new Date(value)
-        return `${date.getFullYear()}年${date.getMonth + 1}月${date.getDate()}日`
+        return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
       }
     }
   }

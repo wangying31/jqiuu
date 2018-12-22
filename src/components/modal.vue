@@ -1,5 +1,5 @@
 <template>
-  <transition-group name="modal">
+  <transition name="modal">
     <div class="modal" v-if="getModal.status">
       <div class="modal_wrapper">
         <div class="modal-dialog panel">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-  </transition-group>
+  </transition>
 </template>
 
 <script>

@@ -6,13 +6,13 @@
           <h4 class="col-md-4">
             <label>
               <span>标题：</span>
-              <input type="text" class="form-control panel_tit_input" v-model="article.title">
+              <input type="text" class="form-control panel_tit_input" v-model.trim="article.title">
             </label>
           </h4>
           <h4 class="col-md-4 col-md-offset-4 text-right">
             <label>
               <span>天气：</span>
-              <input type="text" class="form-control panel_tit_input" v-model="article.weather">
+              <input type="text" class="form-control panel_tit_input" v-model.trim="article.weather">
             </label>
           </h4>
         </div>
@@ -27,8 +27,8 @@
         <div class="set_form clearfix">
           <div class="tit">标签</div>
           <div class="inp">
-            <select class="form-control panel_tit_input" v-model="article.tag">
-              <option v-for="option in getTags" :value="option" :key="option.id">{{option}}</option>
+            <select class="form-control panel_tit_input" v-model.trim="article.tag">
+              <option v-for="option in getTags" :value="option" :key="option._id">{{option}}</option>
             </select>
             <button class="btn btn-info" @click="addTag">{{tag.text}}</button>
             <input type="text" class="form-control panel_tit_input" v-model.trim="tag.newTag" v-show="tag.show" placeholder="添加标签">
@@ -79,21 +79,20 @@
         this.$store.dispatch('tags')
         this.article.tag = this.getTags[0]
         const url = (process.env.NODE_ENV === 'production')
-          ? 'http://'
+          ? 'http://localhost:3000/article/upload'
           :'http://localhost:3000/article/upload'
 
-        this.editor =  new WE('editor')
-        this.editor.config.menus = [
-          'source', '|',
-          'bold', 'underline', 'italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|',
-          'quote', 'fontfamily', 'fontsize', 'head', 'unorderlist', 'orderlist', 'alignleft', 'aligncenter', 'alignright', '|',
-          'link', 'unlink', 'table', 'img', 'insertcode', '|',
-          'undo', 'redo', 'fullscreen'
+        this.editor = new WE('#editor')
+        this.editor.customConfig.menus = [
+          'bold', 'underline', 'italic', 'strikeThrough', 'eraser', 'foreColor', 'backColor',
+          'quote', 'fontName', 'fontSize', 'head', 'list', 'justify',
+          'link', 'unink', 'table', 'image', 'code', 'emoticon',
+          'undo', 'redo'
         ]
-        this.editor.config.menuFixed = false
-        this.editor.config.uploadImgUrl = url
-        this.editor.config.hideLinkImg = true
-        this.editor.config.uploadHeaders = {
+        this.editor.customConfig.menuFixed = false
+        this.editor.customConfig.uploadImgServer = url
+        this.editor.customConfig.showLinkImg = false
+        this.editor.customConfig.uploadImgHeaders = {
           'Authorization': 'Bearer ' + localStorage.getItem('user').replace(/(^\")|(\"$)/g, '')
         }
         this.editor.create()
@@ -113,8 +112,9 @@
           }
         },
         articleSub () {
-          this.article.content = this.editor.$txt.html()
-          this.article.image = this.editor.$txt.find('img').eq(0).attr('src')
+          this.article.content = this.editor.txt.html()
+          // this.article.image = this.editor.txt.find('img').eq(0).attr('src')
+          this.article.image = this.editor.$textElem.find('img')[0] && this.editor.$textElem.find('img')[0].src
           this.article.status? this.article.status = 1 : this.article.status = 0
           this.$store.dispatch('addArticle', this.article)
         }

@@ -42,6 +42,9 @@
   import {mapGetters, mapActions} from 'vuex'
 
   export default {
+    props: {
+      uid: ''
+    },
     data () {
       return {
 
@@ -63,7 +66,7 @@
     },
     methods: {
       loadArticle(){
-        const id = this.$route.params.uid
+        const id = this.uid
         const lastArcitle = this.getArticleTogether.list[this.getArticleTogether.list.length - 1 ]
         const time = lastArcitle?new Date(lastArcitle.created):new Date()
         const data = id + '/' + time.getTime()

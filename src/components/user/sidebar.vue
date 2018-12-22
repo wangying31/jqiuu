@@ -74,7 +74,7 @@
     },
     methods:{
       user () {
-        return this.getUser.own;
+        return this.getUser.own && this.getUser.info.role == 'admin';
       }
     }
   }

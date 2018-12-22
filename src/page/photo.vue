@@ -79,7 +79,7 @@
         }
       },
       photoLikeBtn (pid, index) {
-        this,$store.dispatch('photoLike', {
+        this.$store.dispatch('photoLike', {
           pid: pid,
           index: index
         })

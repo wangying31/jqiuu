@@ -6,7 +6,7 @@
     <div class="col-md-9 pad-10">
       <div class="row dairy-line">
         <div class="col-md-12">
-          <div class="panel panel_dairy hover_sh" v-for="arcitle in getArticleUser.list" :key="arcitle.id">
+          <div class="panel panel_dairy hover_sh" v-for="arcitle in getArticleUser.list" :key="arcitle._id">
             <div class="panel_tit">
               <router-link :to="{ name: 'page', params: { aid: arcitle._id }}">
                 <h4>{{arcitle.title}}</h4>
@@ -74,7 +74,8 @@
     },
     methods: {
       loadArticle () {
-        const id = this.$route.params.uid
+        // const id = this.$route.params.uid
+        const id = this.uid
         const lastArcitle = this.getArticleUser.list[this.getArticleUser.list.length - 1]
         const time = lastArcitle ? new Date(lastArcitle.created) : new Date()
         const data = id + '/' + time.getTime()

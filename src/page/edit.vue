@@ -51,7 +51,7 @@
   export default {
     data () {
       return {
-        aid: this.$route.params.aid,
+        // aid: this.$route.params.aid,
         tag: {
           text: '添加',
           show: false,
@@ -59,6 +59,9 @@
         },
         newArticleContent: {}
       }
+    },
+    props: {
+      aid: ''
     },
     computed: {
       ...mapGetters({
@@ -78,21 +81,20 @@
       this.$store.dispatch('tags')
 
       const url = (process.env.NODE_ENV === 'production')
-        ? 'http://xx/article/upload'
+        ? 'http://localhost:3000/article/upload'
         :'http://localhost:3000/article/upload'
 
-      this.editor =  new WE('editor')
-      this.editor.config.menus = [
-        'source', '|',
-        'bold', 'underline', 'italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|',
-        'quote', 'fontfamily', 'fontsize', 'head', 'unorderlist', 'orderlist', 'alignleft', 'aligncenter', 'alignright', '|',
-        'link', 'unlink', 'table', 'img', 'insertcode', '|', 'undo', 'redo', 'fullscreen'
+      this.editor = new WE('#editor')
+      this.editor.customConfig.menus = [
+        'bold', 'underline', 'italic', 'strikeThrough', 'eraser', 'foreColor', 'backColor',
+        'quote', 'fontName', 'fontSize', 'head', 'list', 'justify',
+        'link', 'unink', 'table', 'image', 'code', 'emoticon',
+        'undo', 'redo'
       ]
-      this.editor.config.menuFixed = false
-      this.editor.config.uploadImgUrl = url
-      this.editor.config.hideLinkImg = true
-      this.editor.config.withCredentials = false
-      this.editor.config.uploadHeaders = {
+      this.editor.customConfig.menuFixed = false
+      this.editor.customConfig.uploadImgServer = url
+      this.editor.customConfig.showLinkImg = false
+      this.editor.customConfig.uploadImgHeaders = {
         'Authorization': 'Bearer ' + localStorage.getItem('user').replace(/(^\")|(\"$)/g, '')
       }
       this.editor.create()
@@ -120,10 +122,11 @@
       },
       articleSub () {
         this.newArticleContent.aid = this.aid
-        this.newArticleContent.content = this.editor.$txt.html()
-        if(this.newArticleContent.status === false) this.newArticleContent.status = 0
-        if(this.newArticleContent.status === true) this.newArticleContent.status = 1
-        this.newArticleContent.image = this.editor.$txt.find('img').eq(0).attr('src')
+        this.newArticleContent.content = this.editor.txt.html()
+        // if(this.newArticleContent.status === false) this.newArticleContent.status = 0
+        // if(this.newArticleContent.status === true) this.newArticleContent.status = 1
+        this.newArticleContent.status = this.newArticleContent.status ? 1 : 0
+        this.newArticleContent.image = this.editor.$textElem.find('img')[0] && this.editor.$textElem.find('img')[0].src
         this.$store.dispatch('editArticle', this.newArticleContent)
       }
     },
