@@ -55,7 +55,7 @@
                 <div class="panel_comments_content">
                   <div class="panel_comments_head">
                     <span>
-                      <router-link :to="{ name: 'userIndex', params: { uid:getArticle.authId._id }}" class="link">
+                      <router-link :to="{ name: 'userIndex', params: { uid:comment.uid }}" class="link">
                         <strong>{{comment.userId.nickname}}</strong>
                       </router-link>
                     </span>
