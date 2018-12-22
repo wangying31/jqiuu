@@ -6,13 +6,13 @@
           <h4 class="col-md-4">
             <label>
               <span>标题：</span>
-              <input type="text" class="form-control panel_tit_input" v-model="article.title">
+              <input type="text" class="form-control panel_tit_input" v-model.trim="article.title">
             </label>
           </h4>
           <h4 class="col-md-4 col-md-offset-4 text-right">
             <label>
               <span>天气：</span>
-              <input type="text" class="form-control panel_tit_input" v-model="article.weather">
+              <input type="text" class="form-control panel_tit_input" v-model.trim="article.weather">
             </label>
           </h4>
         </div>
@@ -27,7 +27,7 @@
         <div class="set_form clearfix">
           <div class="tit">标签</div>
           <div class="inp">
-            <select class="form-control panel_tit_input" v-model="article.tag">
+            <select class="form-control panel_tit_input" v-model.trim="article.tag">
               <option v-for="option in getTags" :value="option" :key="option._id">{{option}}</option>
             </select>
             <button class="btn btn-info" @click="addTag">{{tag.text}}</button>

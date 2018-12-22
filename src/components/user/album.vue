@@ -67,7 +67,6 @@
       this.$store.dispatch('photoUserClear')
       this.loadPhoto()
       window.addEventListener('scroll', this.loadMore)
-      console.log(this.getPhotoUser)
     },
     methods: {
       preventDefault (e) {
@@ -95,7 +94,8 @@
         }
       },
       loadPhoto () {
-        const id = this.$route.params.uid
+        // const id = this.$route.params.uid
+        const id = this.uid
         const lastList = this.getPhotoUser.list[this.getPhotoUser.list.length - 1 ]
         let time
         if(lastList) {

@@ -121,10 +121,13 @@
   export default {
     data () {
       return {
-        aid: this.$route.params.aid,
+        // aid: this.$route.params.aid,
         commentBox: false,
         commentContent: ''
       }
+    },
+    props: {
+      aid: ''
     },
     computed: {
       ...mapGetters({

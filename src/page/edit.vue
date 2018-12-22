@@ -51,7 +51,7 @@
   export default {
     data () {
       return {
-        aid: this.$route.params.aid,
+        // aid: this.$route.params.aid,
         tag: {
           text: '添加',
           show: false,
@@ -59,6 +59,9 @@
         },
         newArticleContent: {}
       }
+    },
+    props: {
+      aid: ''
     },
     computed: {
       ...mapGetters({

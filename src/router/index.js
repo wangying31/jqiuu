@@ -70,21 +70,25 @@ const routes = [{
     path: '',
     name: 'userIndex',
     component: userIndex,
+    props: true,
     meta: {auth: false}
   }, {
     path: 'album',
     name: 'userAlbum',
     component: userAlbum,
+    props: true,
     meta: {auth: false}
   }, {
     path: 'together',
     name: 'userTogether',
     component: userTogether,
+    props: true,
     meta: {auth: false}
   }, {
     path: 'info',
     name: 'userInfo',
     component: userInfo,
+    props: true,
     meta: {auth: false}
   }]
 }, {
@@ -94,11 +98,13 @@ const routes = [{
   path: '/p/:aid',
   name: 'page',
   component: page,
+  props: true,
   meta: { auth: false }
 }, {
   path: '/p/:aid/edit',
   name: 'edit',
-  component: edit
+  component: edit,
+  props: true
 }]
 
 const router = new Router({

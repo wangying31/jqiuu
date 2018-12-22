@@ -74,7 +74,8 @@
     },
     methods: {
       loadArticle () {
-        const id = this.$route.params.uid
+        // const id = this.$route.params.uid
+        const id = this.uid
         const lastArcitle = this.getArticleUser.list[this.getArticleUser.list.length - 1]
         const time = lastArcitle ? new Date(lastArcitle.created) : new Date()
         const data = id + '/' + time.getTime()

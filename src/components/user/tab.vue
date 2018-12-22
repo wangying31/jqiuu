@@ -58,9 +58,7 @@
         }
       },
       authAndAdmin () {
-        if (this.getAuth) {
-          return this.getUser.info.role == 'admin';
-        }
+        return this.getUser.info.role == 'admin';
       }
     }
   }
