@@ -18,11 +18,6 @@ export default {
     comMessage : message,
     comModal : modal
   }
-  
 }
 
 </script>
-
-<style>
-
-</style>

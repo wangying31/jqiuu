@@ -8,7 +8,7 @@ import './assets/css/common.css'
 import './assets/css/iconfont.css'
 
 /* eslint-disable no-unused-vars */
-var app = new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,
