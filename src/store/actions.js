@@ -331,6 +331,13 @@ export const addPhoto = ({commit}, data) => {
     commit(types.PHOTO_ADD, {
       photo: response.data.photo
     })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '网络故障',
+        type: 'danger'
+      })
+    }
   })
 }
 
