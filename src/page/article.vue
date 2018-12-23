@@ -79,7 +79,7 @@
         this.$store.dispatch('tags')
         this.article.tag = this.getTags[0]
         const url = (process.env.NODE_ENV === 'production')
-          ? 'http://localhost:3000/article/upload'
+          ? 'http://47.106.102.59:3000/article/upload'
           :'http://localhost:3000/article/upload'
 
         this.editor = new WE('#editor')
