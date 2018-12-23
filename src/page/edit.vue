@@ -123,9 +123,11 @@
       articleSub () {
         this.newArticleContent.aid = this.aid
         this.newArticleContent.content = this.editor.txt.html()
+        this.newArticleContent.title = this.newArticleContent.title || this.getArticle.title
+        this.newArticleContent.weather = this.newArticleContent.weather || this.getArticle.weather
         // if(this.newArticleContent.status === false) this.newArticleContent.status = 0
         // if(this.newArticleContent.status === true) this.newArticleContent.status = 1
-        this.newArticleContent.status = this.newArticleContent.status ? 1 : 0
+        this.newArticleContent.status = this.newArticleContent.status == undefined ? this.getArticle.status : (this.newArticleContent.status ? 1 : 0)
         this.newArticleContent.image = this.editor.$textElem.find('img')[0] && this.editor.$textElem.find('img')[0].src
         this.$store.dispatch('editArticle', this.newArticleContent)
       }
