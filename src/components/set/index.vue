@@ -185,7 +185,7 @@
     mounted () {
       this.$store.dispatch('userSet')
       this.url = (process.env.NODE_ENV === 'production')
-                ? ''
+                ? 'http://47.106.102.59:3000/user/header'
                 :'http://localhost:3000/user/header'
     },
     methods: {
